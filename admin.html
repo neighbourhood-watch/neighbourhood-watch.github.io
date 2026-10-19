@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https:; media-src https:; frame-src https://player.vimeo.com https://www.youtube.com https://www.youtube-nocookie.com https://w.soundcloud.com https://open.spotify.com https://archive.org https://drive.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <meta name="theme-color" content="#163e36" />
+    <title>Editor | Incident Register</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header"><a class="brand" href="./"><i data-lucide="shield-check" aria-hidden="true"></i><span>Incident Register</span></a><nav aria-label="Main"><a href="./"><i data-lucide="arrow-left" aria-hidden="true"></i>Viewer</a><button id="lock" class="header-button" hidden><i data-lucide="lock-keyhole" aria-hidden="true"></i>Lock</button></nav></header>
+    <main id="main">
+      <section id="gate" class="access-layout" aria-labelledby="gate-title">
+        <div class="access-mark"><i data-lucide="key-round" aria-hidden="true"></i></div><p class="eyebrow">EDITOR ACCESS</p><h1 id="gate-title">Manage the register</h1><p id="gate-caption" class="muted">Loading the published catalogue...</p>
+        <form id="unlock-form" class="access-form" hidden>
+          <label for="password">Editor password</label><div class="password-field"><input id="password" type="password" autocomplete="current-password" required maxlength="256" /><button type="button" class="icon-button password-toggle" data-password="password" aria-label="Show password" aria-pressed="false" title="Show password"><i data-lucide="eye" aria-hidden="true"></i></button></div>
+          <button type="submit" class="primary wide"><i data-lucide="arrow-right" aria-hidden="true"></i>Open editor</button>
+        </form>
+        <form id="setup-form" class="access-form" hidden>
+          <label for="viewer-password">New viewer password</label><div class="password-field"><input id="viewer-password" type="password" autocomplete="new-password" minlength="12" maxlength="256" required aria-describedby="password-hint" /><button type="button" class="icon-button password-toggle" data-password="viewer-password" aria-label="Show password" aria-pressed="false" title="Show password"><i data-lucide="eye" aria-hidden="true"></i></button></div>
+          <label for="editor-password">New editor password</label><div class="password-field"><input id="editor-password" type="password" autocomplete="new-password" minlength="12" maxlength="256" required aria-describedby="password-hint" /><button type="button" class="icon-button password-toggle" data-password="editor-password" aria-label="Show password" aria-pressed="false" title="Show password"><i data-lucide="eye" aria-hidden="true"></i></button></div>
+          <p id="password-hint" class="field-hint">Two different single words, at least 12 characters each. Use long, randomly generated passwords.</p>
+          <label for="confirm-editor-password">Confirm editor password</label><input id="confirm-editor-password" type="password" autocomplete="new-password" minlength="12" maxlength="256" required />
+          <button type="submit" class="primary wide"><i data-lucide="plus" aria-hidden="true"></i>Create register</button>
+        </form>
+        <p id="gate-error" class="notice" role="alert" tabindex="-1" hidden></p>
+        <div class="import-control"><label for="import-file"><i data-lucide="file-up" aria-hidden="true"></i>Import encrypted catalogue</label><input id="import-file" type="file" accept=".json,application/json" /></div>
+      </section>
+      <section id="editor" class="page" aria-labelledby="editor-title" hidden>
+        <div class="page-heading"><div><p class="eyebrow">SECURITY / EDITOR</p><h1 id="editor-title">Manage incidents<span class="heading-dot">.</span></h1></div><button id="export" class="primary"><i data-lucide="download" aria-hidden="true"></i>Export catalogue</button></div>
+        <div class="editor-status"><span id="save-state">No unpublished changes</span><span id="editor-count"></span></div>
+        <p id="notice" class="notice" role="status" tabindex="-1" hidden></p>
+        <div class="editor-layout">
+          <aside class="editor-sidebar" aria-label="Saved incidents"><button id="new-incident" class="secondary wide"><i data-lucide="plus" aria-hidden="true"></i>New incident</button><div id="editor-list" class="incident-list"></div><details class="password-settings"><summary>Password settings</summary><form id="rotate-form"><label for="rotate-viewer">New viewer password</label><input id="rotate-viewer" type="password" autocomplete="new-password" minlength="12" maxlength="256" required /><label for="rotate-editor">New editor password</label><input id="rotate-editor" type="password" autocomplete="new-password" minlength="12" maxlength="256" required /><p class="field-hint">Different single words, 12+ characters each.</p><button type="submit" class="secondary"><i data-lucide="key-round" aria-hidden="true"></i>Replace passwords</button></form></details></aside>
+          <div class="editor-content">
+            <form id="incident-form">
+              <div class="section-heading"><h2 id="form-title">New incident</h2><span class="muted small">All fields required unless marked optional</span></div>
+              <div class="form-grid"><div><label for="incident-title">Incident title</label><input id="incident-title" required maxlength="160" placeholder="e.g. North entrance access incident" /></div><div><label for="incident-date">Incident date and time</label><input id="incident-date" type="datetime-local" required /><p id="timezone" class="field-hint"></p></div></div>
+              <label for="incident-description">Description (optional)</label><textarea id="incident-description" rows="4" maxlength="12000"></textarea>
+              <div class="section-heading media-heading"><h3>Associated media</h3><button id="add-media" type="button" class="secondary"><i data-lucide="plus" aria-hidden="true"></i>Add media</button></div>
+              <div id="media-fields"></div>
+              <div class="form-actions"><button type="submit" class="primary"><i data-lucide="check" aria-hidden="true"></i>Save incident</button><button id="discard" type="button" class="secondary"><i data-lucide="rotate-ccw" aria-hidden="true"></i>Discard changes</button><button id="delete-incident" type="button" class="danger push-right" hidden><i data-lucide="trash-2" aria-hidden="true"></i>Delete</button></div>
+            </form>
+          </div>
+        </div>
+        <p class="publishing-note">Publishing is manual: replace <strong>public/data/incidents.enc.json</strong> in your GitHub repository with the exported file.</p>
+      </section>
+    </main>
+    <footer class="site-footer"><span>INCIDENT REGISTER</span><span>Editor workspace</span></footer>
+    <noscript><p class="notice error">JavaScript is required to use the editor.</p></noscript>
+    <script type="module" src="./js/editor.js"></script>
+  </body>
+</html>
