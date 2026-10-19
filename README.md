@@ -49,8 +49,8 @@ updating the workflow's `branches` setting. No personal access token is needed.
 1. Open **Editor** on the local or published site. On first use, create your two
    passwords. Once a catalogue is published, enter its editor password instead.
    You can also import a previously exported encrypted catalogue.
-2. Add an incident title, date/time, optional description, and one or more media
-   items. Dates are entered in the editor's local timezone, stored as UTC, and
+2. Add an incident title, date/time, optional location (exact address or nearest
+   intersection), optional description, and one or more media items. Dates are entered in the editor's local timezone, stored as UTC, and
    displayed in each viewer's local timezone with a timezone label.
 3. For each media item, select its type, enter a meaningful label, and paste its
    embed code or HTTPS media URL. **Preview media** is optional.

@@ -99,6 +99,7 @@ function fillForm(incident = null, moveFocus = false) {
   $('#form-title').textContent = incident ? 'Edit incident' : 'New incident';
   $('#incident-title').value = incident?.title || '';
   $('#incident-date').value = incident ? localDateValue(incident.occurredAt) : '';
+  $('#incident-location').value = incident?.location || '';
   $('#incident-description').value = incident?.description || '';
   $('#delete-incident').hidden = !incident;
   $('#media-fields').replaceChildren();
@@ -202,6 +203,7 @@ $('#incident-form').addEventListener('submit', event => {
     const incident = {
       id: selectedId || crypto.randomUUID(),
       title: $('#incident-title').value,
+      location: $('#incident-location').value,
       description: $('#incident-description').value,
       occurredAt: occurredAt.toISOString(),
       media: [...$('#media-fields').children].map(readMediaRow),

@@ -57,6 +57,9 @@ export function validateCatalogue(data) {
     if (typeof incident.description !== 'string' || incident.description.length > 12000) {
       throw new Error('Descriptions must be 12,000 characters or fewer.');
     }
+    if (incident.location !== undefined && (typeof incident.location !== 'string' || incident.location.length > 300)) {
+      throw new Error('Locations must be 300 characters or fewer.');
+    }
     if (typeof incident.occurredAt !== 'string' || !/^\d{4}-\d\d-\d\dT/.test(incident.occurredAt) || !Number.isFinite(Date.parse(incident.occurredAt))) {
       throw new Error('Enter a valid incident date and time.');
     }
@@ -67,6 +70,7 @@ export function validateCatalogue(data) {
       id: incident.id,
       title: incident.title.trim(),
       description: incident.description.trim(),
+      location: incident.location?.trim() || '',
       occurredAt: new Date(incident.occurredAt).toISOString(),
       media: incident.media.map(validateMedia),
     };
@@ -77,7 +81,7 @@ export function validateCatalogue(data) {
 export function findIncidents(incidents, query = '', kind = 'all', order = 'newest') {
   const needle = query.trim().toLocaleLowerCase();
   return incidents.filter(incident =>
-    `${incident.title} ${incident.description} ${new Date(incident.occurredAt).toLocaleDateString()}`.toLocaleLowerCase().includes(needle)
+    `${incident.title} ${incident.description} ${incident.location || ''} ${new Date(incident.occurredAt).toLocaleDateString()}`.toLocaleLowerCase().includes(needle)
     && (kind === 'all' || incident.media.some(media => media.kind === kind)),
   ).sort((left, right) => (Date.parse(right.occurredAt) - Date.parse(left.occurredAt)) * (order === 'oldest' ? -1 : 1));
 }

@@ -24,6 +24,7 @@ function selectIncident(incident, moveFocus = true) {
   const meta = textElement('p', `${formatDate(incident.occurredAt)} / ${formatTime(incident.occurredAt)}`, 'eyebrow detail-date');
   const heading = textElement('h2', incident.title);
   heading.tabIndex = -1;
+  const location = textElement('p', `Location: ${incident.location}`, 'incident-location');
   const description = textElement('p', incident.description, 'incident-description');
   const mediaList = document.createElement('div');
   mediaList.className = 'media-list';
@@ -44,6 +45,7 @@ function selectIncident(incident, moveFocus = true) {
     controls.append(button);
   });
   detail.append(meta, heading);
+  if (incident.location) detail.append(location);
   if (incident.description) detail.append(description);
   detail.append(controls, mediaList);
   selectMedia(0);

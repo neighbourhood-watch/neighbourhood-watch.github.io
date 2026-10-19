@@ -110,6 +110,7 @@ input::file-selector-button { border: 0; padding: 6px 9px; margin-right: 10px; b
 .incident-item-count { font-size: 10px; color: var(--muted); align-self: center; }
 .incident-detail { padding: 30px 0 30px 34px; min-width: 0; }
 .detail-date { margin-bottom: 13px; }
+.incident-location { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; margin: 12px 0; }
 .incident-description { font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; margin: 16px 0 24px; }
 .empty-state { min-height: 380px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 24px; }
 .empty-state > svg { width: 44px; height: 44px; color: #7b9683; margin-bottom: 25px; }

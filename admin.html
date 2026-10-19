@@ -39,6 +39,7 @@
             <form id="incident-form">
               <div class="section-heading"><h2 id="form-title">New incident</h2><span class="muted small">All fields required unless marked optional</span></div>
               <div class="form-grid"><div><label for="incident-title">Incident title</label><input id="incident-title" required maxlength="160" placeholder="e.g. North entrance access incident" /></div><div><label for="incident-date">Incident date and time</label><input id="incident-date" type="datetime-local" required /><p id="timezone" class="field-hint"></p></div></div>
+              <label for="incident-location">Location (optional)</label><input id="incident-location" maxlength="300" placeholder="Exact address or nearest intersection" />
               <label for="incident-description">Description (optional)</label><textarea id="incident-description" rows="4" maxlength="12000"></textarea>
               <div class="section-heading media-heading"><h3>Associated media</h3><button id="add-media" type="button" class="secondary"><i data-lucide="plus" aria-hidden="true"></i>Add media</button></div>
               <div id="media-fields"></div>

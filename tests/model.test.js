@@ -11,6 +11,14 @@ test('validates multiple media per incident and normalizes dates', () => {
   const data = validateCatalogue({ version: 1, incidents: [{ ...incident, media: [...incident.media, { kind: 'audio', mode: 'direct', label: 'Radio recording', src: 'https://example.com/recording.mp3' }] }] });
   assert.equal(data.incidents[0].media.length, 2);
   assert.equal(data.incidents[0].occurredAt, '2026-10-17T12:30:00.000Z');
+  assert.equal(data.incidents[0].location, '');
+});
+
+test('normalizes optional locations and includes them in incident search', () => {
+  const located = validateCatalogue({ version: 1, incidents: [{ ...incident, location: '  Queen St W & Spadina Ave  ' }] }).incidents[0];
+  assert.equal(located.location, 'Queen St W & Spadina Ave');
+  assert.equal(findIncidents([located], 'spadina').length, 1);
+  assert.throws(() => validateCatalogue({ version: 1, incidents: [{ ...incident, location: 'x'.repeat(301) }] }), /Locations/);
 });
 
 test('rejects executable URLs, unsafe frames, malformed incidents and duplicate IDs', () => {
